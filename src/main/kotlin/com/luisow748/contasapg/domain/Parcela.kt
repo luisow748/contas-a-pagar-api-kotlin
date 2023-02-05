@@ -1,12 +1,13 @@
 package com.luisow748.contasapg.domain
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.math.BigDecimal
 
 @Entity
 class Parcela(
 
+        @JsonIgnore
         @ManyToOne(cascade = [CascadeType.PERSIST])
 //        @JoinColumn(name = "conta_id")
         var conta: Conta = Conta(),

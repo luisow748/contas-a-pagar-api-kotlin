@@ -10,6 +10,9 @@ import java.util.*
 @Table(name = "conta")
 class Conta
 (
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int? = -1,
         var status: String? = "",
         var valorTotal: BigDecimal? = BigDecimal.ZERO,
         var qdeParcelas: Int? = 0,
@@ -19,12 +22,7 @@ class Conta
         var parcelas: MutableList<Parcela>? = mutableListOf(),
 
         var dataCadastro: Date? = Date.from(Instant.now()),
-        var dataVencimento: Date? = Date.from(Instant.now()),
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Int? = -1
-
-
+        var dataVencimento: Date? = Date.from(Instant.now())
 )
 
 
