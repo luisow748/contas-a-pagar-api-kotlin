@@ -1,0 +1,14 @@
+
+### Get all the messages
+GET http://localhost:8080/contas
+
+### Post 'Hello!"
+POST http://localhost:8080/contas1\1
+Content-Type: application/json
+
+{
+  "status": "ok3",
+  "valorTotal": 867.25,
+  "qdeParcelas": 5,
+  "valorParcela": null
+}
