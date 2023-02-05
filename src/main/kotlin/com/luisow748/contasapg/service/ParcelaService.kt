@@ -27,10 +27,14 @@ class ParcelaService(val parcelaRepository: ParcelaRepository) {
 
     private fun getValor(conta: Conta, qdeParcelas: Int): BigDecimal {
         if (conta.valorTotal != null) {
-            return (conta.valorTotal?.divide(BigDecimal(qdeParcelas)))!!
+            conta.valorParcela = getValorParcelaPeloValorTotalConta(conta, qdeParcelas)
+            return conta.valorParcela!!
         }
         return BigDecimal.ZERO
     }
+
+    private fun getValorParcelaPeloValorTotalConta(conta: Conta, qdeParcelas: Int) =
+        (conta.valorTotal?.divide(BigDecimal(qdeParcelas)))!!
 
 }
 
