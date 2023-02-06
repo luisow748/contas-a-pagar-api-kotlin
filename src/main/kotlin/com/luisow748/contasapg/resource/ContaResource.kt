@@ -1,18 +1,18 @@
 package com.luisow748.contasapg.resource
 
-import com.luisow748.contasapg.domain.Conta
-import com.luisow748.contasapg.service.ContaService
+import com.luisow748.contasapg.domain.Account
+import com.luisow748.contasapg.service.account.AccountService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/conta")
-class ContaResource(val contaService: ContaService) {
+class ContaResource(val accountService: AccountService) {
 
     @GetMapping
-    fun getAll(): List<Conta> = contaService.getAll()
+    fun getAll(): List<Account> = accountService.getAll()
 
     @PostMapping
-    fun save(@RequestBody conta: Conta): Conta {
-       return contaService.save(conta)
+    fun save(@RequestBody account: Account): Account {
+       return accountService.save(account)
     }
 }

@@ -1,11 +1,9 @@
 package com.luisow748.contasapg.repository
 
-import com.luisow748.contasapg.domain.Conta
+import com.luisow748.contasapg.domain.Account
 import org.springframework.data.jpa.repository.JpaRepository
 
-
-//@RepositoryRestResource(path = "contas")
-interface ContaRepository : JpaRepository<Conta, Int> {
+interface ContaRepository : JpaRepository<Account, Int> {
 
 
 
