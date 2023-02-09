@@ -28,6 +28,12 @@ class AccountFixture {
             }
             return accountList
         }
+
+        fun getEmptyInputAccount(): Account {
+            val account = Account()
+            account.status = "not saved yet"
+            return account
+        }
     }
 
 }
