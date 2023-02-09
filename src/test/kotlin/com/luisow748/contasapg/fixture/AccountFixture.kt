@@ -1,37 +1,32 @@
 package com.luisow748.contasapg.fixture
 
-import com.luisow748.contasapg.domain.Account
+import com.luisow748.contasapg.service.dto.account.AccountRequest
 import java.math.BigDecimal
-import java.time.Instant
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 class AccountFixture {
     companion object {
-        fun get(id: Int): Account {
-            return Account(
-                    id,
-                    "status",
-                    totalValue = BigDecimal.valueOf(1052.99),
-                    10,
-                    BigDecimal.valueOf(108.44),
-                    mutableListOf(),
-                    createdAt = Date.from(Instant.now()),
-                    expirationDate = Date.from(Instant.now().plus(10, ChronoUnit.DAYS))
+        fun get(id: Int): AccountRequest {
+            val totalValue = BigDecimal.valueOf(52.99 * id)
+            val installmentQty = 10
+            val installmentValue = totalValue / BigDecimal.valueOf(installmentQty.toLong())
+            return AccountRequest(
+                    totalValue = totalValue,
+                    installmentQty,
+                    installmentValue,
+                   "status: $id"
             )
         }
 
-        fun getList(qty: Int): List<Account> {
-            val accountList: MutableList<Account> = mutableListOf()
+        fun getList(qty: Int): List<AccountRequest> {
+            val accountList: MutableList<AccountRequest> = mutableListOf()
             for (num in qty downTo 1) {
                 accountList.add(get(num))
             }
             return accountList
         }
 
-        fun getEmptyInputAccount(): Account {
-            val account = Account()
-            account.status = "not saved yet"
+        fun getEmptyInputAccount(): AccountRequest {
+            val account = AccountRequest(BigDecimal.ZERO, 10, BigDecimal.ZERO, "not saved yet")
             return account
         }
     }

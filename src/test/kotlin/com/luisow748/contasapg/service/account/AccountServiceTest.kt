@@ -2,6 +2,7 @@ package com.luisow748.contasapg.service.account
 
 import com.luisow748.contasapg.fixture.AccountFixture
 import com.luisow748.contasapg.repository.AccountRepository
+import com.luisow748.contasapg.service.dto.account.toEntity
 import com.luisow748.contasapg.service.installment.InstallmentService
 import io.mockk.every
 import io.mockk.mockk
@@ -17,7 +18,7 @@ open class AccountServiceTest {
     @Test
     fun shouldSaveAccount() {
         val account = AccountFixture.get(1)
-        every { accountRepository.save(account) } returns account
+        every { accountRepository.save(any()) } returns account.toEntity()
         val savedAccount = accountService.save(account)
         assertThat(savedAccount).isEqualTo(account)
     }
@@ -25,7 +26,7 @@ open class AccountServiceTest {
     @Test
     fun shouldGetAListOfAccounts() {
         val accountList = AccountFixture.getList(10)
-        every { accountRepository.findAll() } returns accountList
+        every { accountRepository.findAll() } returns accountList.map { it.toEntity() }
         val accountListReturned = accountService.getAll()
         assertThat(accountListReturned).element(1).isEqualTo(accountList[1])
     }

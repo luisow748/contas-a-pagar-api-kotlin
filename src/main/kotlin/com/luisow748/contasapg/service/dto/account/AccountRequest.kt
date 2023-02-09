@@ -7,7 +7,7 @@ data class AccountRequest(
         val totalValue: BigDecimal?,
         val installmentQty: Int?,
         val installmentValue: BigDecimal?,
-        val status: String
+        var status: String
 )
 fun AccountRequest.toEntity() = Account(
         totalValue = totalValue,

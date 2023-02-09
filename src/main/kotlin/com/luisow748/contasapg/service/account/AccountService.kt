@@ -13,19 +13,20 @@ class AccountService(
         val accountRepository: AccountRepository,
         val installmentService: InstallmentService
 ) {
-    fun getAll(): List<Account> {
-        return accountRepository.findAll()
+    fun getAll(): List<AccountRequest> {
+        return accountRepository.findAll().map { it.toResponse() }
     }
 
-    fun save(account: Account): Account {
-        prepareAccount(account)
-        return accountRepository.save(account)
+    fun save(account: AccountRequest): AccountRequest {
+        val accountEntity = account.toEntity()
+        prepareAccount(accountEntity)
+        val savedAccount = accountRepository.save(accountEntity)
+        return savedAccount.toResponse()
     }
 
     fun saveAll(accountInputList: List<AccountRequest>): List<AccountRequest> {
         if (accountInputList.size < 100) {
-            val savedAccountList = accountInputList.map { save(it.toEntity()) }
-            return savedAccountList.map { it.toResponse() }
+            return accountInputList.map { save(it) }.toList()
         }
         return emptyList()
     }
