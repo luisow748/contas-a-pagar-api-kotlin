@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/conta")
-class ContaResource(val accountService: AccountService) {
+class AccountResource(val accountService: AccountService) {
 
     @GetMapping
     fun getAll(): List<Account> = accountService.getAll()
