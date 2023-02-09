@@ -3,7 +3,7 @@ package com.luisow748.contasapg.repository
 import com.luisow748.contasapg.domain.Account
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface ContaRepository : JpaRepository<Account, Int> {
+interface AccountRepository : JpaRepository<Account, Int> {
 
 
 

@@ -12,6 +12,7 @@ class Account
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Int? = -1,
+
         var status: String? = "",
         var totalValue: BigDecimal? = BigDecimal.ZERO,
         var installmentQty: Int? = 0,
