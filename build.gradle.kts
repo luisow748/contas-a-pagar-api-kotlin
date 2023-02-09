@@ -37,6 +37,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
+	implementation("com.ninja-squad:springmockk:4.0.0")
+
 	implementation("hibernate:hibernate:2.1.3")
 }
 
