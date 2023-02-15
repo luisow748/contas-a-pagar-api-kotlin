@@ -1,7 +1,7 @@
 package com.luisow748.contasapg.resource
 
 import com.fasterxml.jackson.module.kotlin.jsonMapper
-import com.luisow748.contasapg.fixture.AccountFixture
+import com.luisow748.contasapg.fixture.AccountRequestFixture
 import com.luisow748.contasapg.service.account.AccountService
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.utils.enum.PathEnum
@@ -26,9 +26,9 @@ class AccountResourceTest(@Autowired val mockMvc: MockMvc) {
 
     @BeforeEach
     fun setUp() {
-        account = AccountFixture.get(1)
-        inputAccount = AccountFixture.getEmptyInputAccount()
-        every { accountService.getAll() } returns AccountFixture.getList(10)
+        account = AccountRequestFixture.getWithInstallmentValue(1)
+        inputAccount = AccountRequestFixture.getEmptyInputAccount()
+        every { accountService.getAll() } returns AccountRequestFixture.getList(10)
         every { accountService.save(any()) } returns account
     }
 

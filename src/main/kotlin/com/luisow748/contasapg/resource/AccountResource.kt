@@ -6,13 +6,18 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/conta")
+@RequestMapping("/api/account")
 class AccountResource(val accountService: AccountService) {
 
     @GetMapping
     fun getAll(): ResponseEntity<List<AccountRequest>> {
         val accounts = accountService.getAll()
         return ResponseEntity.ok(accounts)
+    }
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: Int): ResponseEntity<AccountRequest>{
+        return ResponseEntity.ok(accountService.getById(id))
     }
 
     @PostMapping

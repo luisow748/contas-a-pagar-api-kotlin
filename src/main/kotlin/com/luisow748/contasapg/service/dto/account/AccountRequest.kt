@@ -4,12 +4,14 @@ import com.luisow748.contasapg.domain.Account
 import java.math.BigDecimal
 
 data class AccountRequest(
-        val totalValue: BigDecimal?,
-        val installmentQty: Int?,
-        val installmentValue: BigDecimal?,
+        var id: Int?,
+        var totalValue: BigDecimal?,
+        var installmentQty: Int?,
+        var installmentValue: BigDecimal?,
         var status: String
 )
 fun AccountRequest.toEntity() = Account(
+        id = id,
         totalValue = totalValue,
         installmentQty = installmentQty,
         installmentValue = installmentValue,
@@ -17,6 +19,7 @@ fun AccountRequest.toEntity() = Account(
 )
 
 fun Account.toResponse() = AccountRequest(
+        id = id,
         totalValue = totalValue,
         installmentQty = installmentQty,
         installmentValue = installmentValue,

@@ -17,6 +17,10 @@ class AccountService(
         return accountRepository.findAll().map { it.toResponse() }
     }
 
+    fun getById(id: Int): AccountRequest {
+        return accountRepository.findById(id).orElse(Account()).toResponse()
+    }
+
     fun save(account: AccountRequest): AccountRequest {
         val accountEntity = account.toEntity()
         prepareAccount(accountEntity)

@@ -1,16 +1,25 @@
 package com.luisow748.contasapg.service.installment
 
 import com.luisow748.contasapg.domain.Account
+import com.luisow748.contasapg.domain.Installment
+import com.luisow748.contasapg.repository.InstallmentRepository
 import org.springframework.stereotype.Service
 
 @Service
 class InstallmentService(
-        val setInstallmentService: SetInstallmentService
+    val installmentRepository: InstallmentRepository,
+    val setInstallmentService: SetInstallmentService
 ) {
-
-    fun setInstallments(account: Account) {
-        setInstallmentService.execute(account)
+    fun getAll(): List<Installment> {
+        return installmentRepository.findAll()
     }
 
+    fun getByAccountId(accountId: Int): List<Installment> {
+        return installmentRepository.findByAccount_Id(accountId)
+    }
+
+    fun setInstallments(account: Account): Account {
+        return setInstallmentService.execute(account)
+    }
 }
 
