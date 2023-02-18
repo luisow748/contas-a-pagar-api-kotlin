@@ -7,7 +7,7 @@ import java.math.BigDecimal
 
 @Service
 class SetInstallmentService {
-    fun execute(account: Account) {
+    fun execute(account: Account): Account {
         val installmentQty: Int = account.installmentQty ?: 0
         if (installmentQty > 0) {
             val installmentValue: BigDecimal = account.installmentValue
@@ -15,5 +15,6 @@ class SetInstallmentService {
             for (num in installmentQty downTo 1)
                 account.installments?.add(Installment(account = account, value = installmentValue, number = num))
         }
+        return account
     }
 }
