@@ -3,17 +3,15 @@ package com.luisow748.contasapg.service.account
 import com.luisow748.contasapg.fixture.AccountRequestFixture
 import com.luisow748.contasapg.repository.AccountRepository
 import com.luisow748.contasapg.service.dto.account.toEntity
-import com.luisow748.contasapg.service.installment.InstallmentService
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
-
 import org.junit.jupiter.api.Test
 
 open class AccountServiceTest {
     private val accountRepository: AccountRepository = mockk()
-    private val installmentService: InstallmentService = mockk(relaxed = true)
-    private val accountService: AccountService = AccountService(accountRepository, installmentService)
+    private val accountServiceMediator: AccountServiceMediator = mockk(relaxed = true)
+    private val accountService: AccountService = AccountService(accountRepository, accountServiceMediator)
 
     @Test
     fun shouldSaveAccount() {

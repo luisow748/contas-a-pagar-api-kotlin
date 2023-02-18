@@ -6,7 +6,7 @@ import com.luisow748.contasapg.repository.InstallmentRepository
 import org.springframework.stereotype.Service
 
 @Service
-class InstallmentService(
+class InstallmentServiceMediator(
     val installmentRepository: InstallmentRepository,
     val setInstallmentService: SetInstallmentService
 ) {

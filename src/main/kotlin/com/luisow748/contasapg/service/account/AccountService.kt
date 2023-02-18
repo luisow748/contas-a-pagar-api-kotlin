@@ -5,13 +5,12 @@ import com.luisow748.contasapg.repository.AccountRepository
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.service.dto.account.toEntity
 import com.luisow748.contasapg.service.dto.account.toResponse
-import com.luisow748.contasapg.service.installment.InstallmentService
 import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
-        val accountRepository: AccountRepository,
-        val installmentService: InstallmentService
+    val accountRepository: AccountRepository,
+    val accountServiceMediator: AccountServiceMediator
 ) {
     fun getAll(): List<AccountRequest> {
         return accountRepository.findAll().map { it.toResponse() }
@@ -23,7 +22,7 @@ class AccountService(
 
     fun save(account: AccountRequest): AccountRequest {
         val accountEntity = account.toEntity()
-        prepareAccount(accountEntity)
+        accountServiceMediator.prepareAccount(accountEntity)
         val savedAccount = accountRepository.save(accountEntity)
         return savedAccount.toResponse()
     }
@@ -35,7 +34,5 @@ class AccountService(
         return emptyList()
     }
 
-    private fun prepareAccount(account: Account) {
-        installmentService.setInstallments(account)
-    }
+
 }

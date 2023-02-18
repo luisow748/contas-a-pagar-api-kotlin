@@ -2,6 +2,7 @@ package com.luisow748.contasapg.fixture
 
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import java.math.BigDecimal
+import java.time.LocalDate
 
 class AccountRequestFixture {
     companion object {
@@ -14,7 +15,9 @@ class AccountRequestFixture {
                 totalValue = totalValue,
                 installmentQty,
                 installmentValue,
-                "status: $id"
+                "status: $id",
+                createdAt = LocalDate.now().toString(),
+                expirationDate = LocalDate.now().plusMonths(installmentQty.toLong()).toString()
             )
         }
 
@@ -27,7 +30,15 @@ class AccountRequestFixture {
         }
 
         fun getEmptyInputAccount(): AccountRequest {
-            return AccountRequest(1, BigDecimal.ZERO, 10, BigDecimal.ZERO, "not saved yet")
+            return AccountRequest(
+                1,
+                BigDecimal.ZERO,
+                10,
+                BigDecimal.ZERO,
+                "not saved yet",
+                LocalDate.now().plusMonths(10L).toString(),
+                LocalDate.now().plusMonths(10).toString()
+                )
         }
 
         fun getEmptyInputAccountWithoutInstallments(): AccountRequest {

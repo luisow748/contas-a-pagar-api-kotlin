@@ -1,5 +1,6 @@
 package com.luisow748.contasapg.resource
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.luisow748.contasapg.fixture.AccountRequestFixture
 import com.luisow748.contasapg.service.account.AccountService
@@ -7,23 +8,33 @@ import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.utils.enum.PathEnum
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@WebMvcTest(AccountResource::class)
+class AccountResourceTest{
 
-@WebMvcTest
-class AccountResourceTest(@Autowired val mockMvc: MockMvc) {
+    @Autowired
+    lateinit var mockMvc: MockMvc
 
     @MockkBean
     lateinit var accountService: AccountService
     private lateinit var account: AccountRequest
     private lateinit var inputAccount: AccountRequest
 
+    @BeforeAll
+    fun init(){
+        val mapper = ObjectMapper()
+        mapper.findAndRegisterModules()
+    }
     @BeforeEach
     fun setUp() {
         account = AccountRequestFixture.getWithInstallmentValue(1)

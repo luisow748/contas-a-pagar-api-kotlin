@@ -2,8 +2,7 @@ package com.luisow748.contasapg.domain
 
 import jakarta.persistence.*
 import java.math.BigDecimal
-import java.time.Instant
-import java.util.*
+import java.time.LocalDate
 
 @Entity
 @Table(name = "account")
@@ -21,8 +20,8 @@ class Account
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "account")
         var installments: MutableList<Installment>? = mutableListOf(),
 
-        var createdAt: Date? = Date.from(Instant.now()),
-        var expirationDate: Date? = Date.from(Instant.now())
+        var createdAt: String? = LocalDate.now().toString(),
+        var expirationDate: String? = LocalDate.now().toString()
 )
 
 

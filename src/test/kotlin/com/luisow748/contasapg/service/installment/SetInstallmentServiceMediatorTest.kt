@@ -5,7 +5,7 @@ import com.luisow748.contasapg.fixture.AccountRequestFixture
 import com.luisow748.contasapg.service.dto.account.toEntity
 import org.junit.jupiter.api.Test
 
-class SetInstallmentServiceTest {
+class SetInstallmentServiceMediatorTest {
 
     private lateinit var setInstallmentService: SetInstallmentService
     private lateinit var account: Account

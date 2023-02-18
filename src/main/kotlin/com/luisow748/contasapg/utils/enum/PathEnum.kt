@@ -1,8 +1,7 @@
 package com.luisow748.contasapg.utils.enum
 
-const val ACCOUNT = "conta"
+const val ACCOUNT = "api/account"
 enum class PathEnum(val path: String) {
-    API("/api"),
     ACCOUNT_GETALL("/$ACCOUNT"),
     ACCOUNT_SAVE("/$ACCOUNT")
 }
