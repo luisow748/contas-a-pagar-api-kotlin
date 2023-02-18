@@ -39,6 +39,7 @@ dependencies {
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	implementation("com.ninja-squad:springmockk:4.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-json:3.0.2")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.0.2")
 
 	implementation("hibernate:hibernate:2.1.3")
 }
