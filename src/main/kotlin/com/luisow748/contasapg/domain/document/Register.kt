@@ -1,6 +1,8 @@
 package com.luisow748.contasapg.domain.document
 
-import org.springframework.beans.factory.annotation.Value
+import lombok.AllArgsConstructor
+import lombok.Getter
+import lombok.Setter
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
@@ -9,10 +11,12 @@ import org.springframework.stereotype.Component
 
 @Component
 @Document("register")
+@Getter
+@Setter
+@AllArgsConstructor
 data class Register(
     @Id
-    @Value(" a")
-    val id: String? = "",
+    val id: String? = null,
 
     @Field(name = "description")
     @Indexed(unique = true)
