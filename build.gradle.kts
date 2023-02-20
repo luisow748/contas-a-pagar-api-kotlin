@@ -39,7 +39,9 @@ dependencies {
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	implementation("com.ninja-squad:springmockk:4.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-json:3.0.2")
-
+//	implementation("org.springframework.data:spring-data-redis:3.0.2")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+//	implementation("io.lettuce:lettuce-core:6.1.4.RELEASE")
 	implementation("hibernate:hibernate:2.1.3")
 }
 
