@@ -5,10 +5,11 @@ import java.math.BigDecimal
 
 data class AccountRequest(
         var id: Int?,
+        var name: String?,
         var totalValue: BigDecimal?,
         var installmentQty: Int?,
         var installmentValue: BigDecimal?,
-        var status: String,
+        var status: String?,
         var createdAt: String?,
         var expirationDate: String?,
 )
@@ -19,7 +20,8 @@ fun AccountRequest.toEntity() = Account(
         installmentValue = installmentValue,
         status = status,
         createdAt = createdAt,
-        expirationDate = expirationDate
+        expirationDate = expirationDate,
+        name = name
 )
 
 fun Account.toResponse() = AccountRequest(
@@ -29,5 +31,6 @@ fun Account.toResponse() = AccountRequest(
         installmentValue = installmentValue,
         status = status!!,
         createdAt = createdAt,
-        expirationDate = expirationDate
+        expirationDate = expirationDate,
+        name = name
 )
