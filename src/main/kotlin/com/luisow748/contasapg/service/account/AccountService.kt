@@ -5,7 +5,9 @@ import com.luisow748.contasapg.repository.AccountRepository
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.service.dto.account.toEntity
 import com.luisow748.contasapg.service.dto.account.toResponse
+import com.luisow748.contasapg.utils.enum.MonthEnum
 import org.springframework.stereotype.Service
+import java.time.Month
 
 @Service
 class AccountService(
@@ -20,6 +22,13 @@ class AccountService(
         return accountRepository.findById(id).orElse(Account()).toResponse()
     }
 
+    fun getByMonth(month: String): List<AccountRequest> {
+        val monthNameById = MonthEnum.getMonthNameById(month)
+
+        return accountRepository.findByMonth(Month.valueOf(monthNameById))
+            .map { it.toResponse() }
+    }
+
     fun save(account: AccountRequest): AccountRequest {
         val accountEntity = account.toEntity()
         accountServiceMediator.prepareAccount(accountEntity)
@@ -32,6 +41,10 @@ class AccountService(
             return accountInputList.map { save(it) }.toList()
         }
         return emptyList()
+    }
+
+    fun delete(id: Int){
+        accountRepository.deleteById(id)
     }
 
 

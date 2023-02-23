@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/contasapg?createDatabaseIfNotExist=true
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+  data:
+    rest:
+      default-media-type: application/json
+    mongodb:
+      authentication-database: admin
+      username: root
+      password: password
+      database: mongo
+      port: 27017
+      host: localhost
+#      uri: mongodb://root:password@172.24.0.3:27017/?authSource=admin
+  profiles:
+        active: container
+server:
+  port: 8082
+
+

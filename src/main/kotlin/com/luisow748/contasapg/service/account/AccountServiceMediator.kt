@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class AccountServiceMediator(
     val dateAccountService: DateAccountService,
-    val installmentServiceMediator: InstallmentServiceMediator
+    val installmentServiceMediator: InstallmentServiceMediator,
+    val statusAccountService: StatusAccountService,
 ) {
     lateinit var account: Account
     fun setCreationDate() {
@@ -17,10 +18,16 @@ class AccountServiceMediator(
     fun setExpirationDate(){
         dateAccountService.setExpirationDate(this.account)
     }
+
+    fun setStatus(){
+        statusAccountService.setStatus(this.account)
+    }
     fun prepareAccount(account: Account) {
         this.account = account
+        setStatus()
         installmentServiceMediator.setInstallments(account)
         setCreationDate()
         setExpirationDate()
+
     }
 }

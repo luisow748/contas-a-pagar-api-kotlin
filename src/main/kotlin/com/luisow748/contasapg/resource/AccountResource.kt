@@ -21,6 +21,11 @@ class AccountResource(val accountService: AccountService) {
         return ResponseEntity.ok(accountService.getById(id))
     }
 
+    @GetMapping("/month/{month}")
+    fun getByMonth(@PathVariable month: String): ResponseEntity<List<AccountRequest>>{
+        return ResponseEntity.ok(accountService.getByMonth(month))
+    }
+
     @PostMapping
     fun save(@RequestBody accountInput: AccountRequest): ResponseEntity<AccountRequest> {
         val savedAccount = accountService.save(accountInput)
@@ -34,5 +39,11 @@ class AccountResource(val accountService: AccountService) {
             return ResponseEntity.badRequest().build()
         }
         return ResponseEntity.ok(savedAccountList)
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Int): ResponseEntity<String> {
+        accountService.delete(id)
+        return ResponseEntity.ok().build()
     }
 }
