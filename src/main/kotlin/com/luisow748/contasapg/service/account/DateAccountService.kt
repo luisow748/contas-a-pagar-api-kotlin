@@ -12,11 +12,11 @@ class DateAccountService {
     }
 
     fun setExpirationDate(account: Account): Account {
-        if (account.installmentQty != null && account.installmentQty!! > 1) {
-            account.expirationDate = account.installmentQty?.let { LocalDate.now().plusMonths(it.toLong()).toString() }
-        } else {
-            account.expirationDate = LocalDate.now().plusMonths(1).toString()
-        }
+        val monthsToPay = account.installmentQty ?: 1
+        val localDate = LocalDate.now().plusMonths(monthsToPay.toLong())
+        account.expirationDay = account.expirationDay ?: localDate.dayOfMonth.toString()
+        account.expirationMonth = account.expirationMonth ?: localDate.monthValue.toString()
+        account.expirationYear = account.expirationYear ?: localDate.year.toString()
         return account
     }
 }
