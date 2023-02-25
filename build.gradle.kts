@@ -40,8 +40,10 @@ dependencies {
 	implementation("com.ninja-squad:springmockk:4.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-json:3.0.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.0.2")
+//	implementation ("org.springframework.boot:spring-boot-starter-security")
 
 	implementation("hibernate:hibernate:2.1.3")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<KotlinCompile> {
