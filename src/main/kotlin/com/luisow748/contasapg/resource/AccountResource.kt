@@ -21,9 +21,9 @@ class AccountResource(val accountService: AccountService) {
         return ResponseEntity.ok(accountService.getById(id))
     }
 
-    @GetMapping("/month/{month}")
-    fun getByMonth(@PathVariable month: String): ResponseEntity<List<AccountRequest>>{
-        return ResponseEntity.ok(accountService.getByMonth(month))
+    @GetMapping("/year/{year}/month/{month}")
+    fun getByMonth(@PathVariable month: String, @PathVariable year: String): ResponseEntity<List<AccountRequest>>{
+        return ResponseEntity.ok(accountService.getByMonth(month, year))
     }
 
     @PostMapping
@@ -45,5 +45,9 @@ class AccountResource(val accountService: AccountService) {
     fun delete(@PathVariable id: Int): ResponseEntity<String> {
         accountService.delete(id)
         return ResponseEntity.ok().build()
+    }
+    @PostMapping("/fakes")
+    fun saveFakes(): ResponseEntity<List<AccountRequest>> {
+        return ResponseEntity.ok(accountService.saveFakes())
     }
 }

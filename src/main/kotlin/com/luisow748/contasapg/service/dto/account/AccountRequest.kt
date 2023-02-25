@@ -11,7 +11,10 @@ data class AccountRequest(
         var installmentValue: BigDecimal?,
         var status: String?,
         var createdAt: String?,
-        var expirationDate: String?,
+        var expirationDay: String?,
+        var expirationMonth: String?,
+        var expirationYear: String?,
+//        var expirationDate: String?,
 )
 fun AccountRequest.toEntity() = Account(
         id = id,
@@ -20,7 +23,9 @@ fun AccountRequest.toEntity() = Account(
         installmentValue = installmentValue,
         status = status ?: "",
         createdAt = createdAt,
-        expirationDate = expirationDate,
+        expirationDay = expirationDay,
+        expirationMonth = expirationMonth,
+        expirationYear = expirationYear,
         name = name
 )
 
@@ -31,6 +36,8 @@ fun Account.toResponse() = AccountRequest(
         installmentValue = installmentValue,
         status = status ?: "",
         createdAt = createdAt,
-        expirationDate = expirationDate,
+        expirationDay = expirationDay,
+        expirationMonth = expirationMonth,
+        expirationYear = expirationYear,
         name = name
 )

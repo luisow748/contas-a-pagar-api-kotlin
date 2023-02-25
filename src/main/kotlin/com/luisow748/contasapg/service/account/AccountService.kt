@@ -5,9 +5,8 @@ import com.luisow748.contasapg.repository.AccountRepository
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.service.dto.account.toEntity
 import com.luisow748.contasapg.service.dto.account.toResponse
-import com.luisow748.contasapg.utils.enum.MonthEnum
 import org.springframework.stereotype.Service
-import java.time.Month
+import java.math.BigDecimal
 
 @Service
 class AccountService(
@@ -22,10 +21,8 @@ class AccountService(
         return accountRepository.findById(id).orElse(Account()).toResponse()
     }
 
-    fun getByMonth(month: String): List<AccountRequest> {
-        val monthNameById = MonthEnum.getMonthNameById(month)
-
-        return accountRepository.findByMonth(Month.valueOf(monthNameById))
+    fun getByMonth(month: String, year: String): List<AccountRequest> {
+        return accountRepository.findByExpirationMonthAndExpirationYear(month, year)
             .map { it.toResponse() }
     }
 
@@ -45,6 +42,26 @@ class AccountService(
 
     fun delete(id: Int){
         accountRepository.deleteById(id)
+    }
+
+    fun saveFakes(): List<AccountRequest> {
+        val accountList = mutableListOf<AccountRequest>()
+        for (index in 1..25) {
+            val accountRequest = AccountRequest(
+                index,
+                "Account nº $index",
+                BigDecimal.valueOf((100..8000).random().toDouble()),
+                (1..12).random(),
+                BigDecimal.ZERO,
+                "pending",
+                "",
+                (1..31).random().toString(),
+                null,
+                null
+            )
+            accountList.add(save(accountRequest))
+        }
+        return accountList
     }
 
 
