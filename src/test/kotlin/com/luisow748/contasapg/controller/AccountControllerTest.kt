@@ -1,4 +1,4 @@
-package com.luisow748.contasapg.resource
+package com.luisow748.contasapg.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jsonMapper
@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@WebMvcTest(AccountResource::class)
-class AccountResourceTest{
+@WebMvcTest(AccountController::class)
+class AccountControllerTest{
 
     @Autowired
     lateinit var mockMvc: MockMvc

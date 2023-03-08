@@ -1,14 +1,14 @@
-package com.luisow748.contasapg.resource
+package com.luisow748.contasapg.controller
 
 import com.luisow748.contasapg.service.account.AccountService
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(maxAge = 3600)
+//@CrossOrigin(maxAge = 3600, origins = ["http://localhost:**"])
 @RestController
 @RequestMapping("/api/account")
-class AccountResource(val accountService: AccountService) {
+class AccountController(val accountService: AccountService) {
 
     @GetMapping
     fun getAll(): ResponseEntity<List<AccountRequest>> {

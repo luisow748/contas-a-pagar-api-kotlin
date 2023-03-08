@@ -39,7 +39,12 @@ dependencies {
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	implementation("com.ninja-squad:springmockk:4.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-json:3.0.2")
-	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.0.2")
+//	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.0.2")
+
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	implementation("org.springframework.boot:spring-boot-starter-security:3.0.4")
 
 	implementation("hibernate:hibernate:2.1.3")
 }

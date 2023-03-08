@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/contasapg?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/jwt_security?createDatabaseIfNotExist=true
     username: postgres
     password: postgres
   jpa:
@@ -8,20 +8,23 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
-  data:
-    rest:
-      default-media-type: application/json
-    mongodb:
-      authentication-database: admin
-      username: root
-      password: password
-      database: mongo
-      port: 27017
-      host: localhost
-#      uri: mongodb://root:password@172.24.0.3:27017/?authSource=admin
-  profiles:
-        active: container
+    show-sql: true
+#  data:
+#    rest:
+#      default-media-type: application/json
+#    mongodb:
+#      authentication-database: admin
+#      username: root
+#      password: password
+#      database: mongo
+#      port: 27017
+#      host: localhost
+##      uri: mongodb://root:password@172.24.0.3:27017/?authSource=admin
+#  profiles:
+#        active: container
 server:
   port: 8082
+app:
+  secret: ${SECRET}
 
 
