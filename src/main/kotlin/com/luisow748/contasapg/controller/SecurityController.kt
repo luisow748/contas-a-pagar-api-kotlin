@@ -1,4 +1,4 @@
-package com.luisow748.contasapg.controller;
+package com.luisow748.contasapg.controller
 
 import com.luisow748.contasapg.service.input.AuthenticationRequest
 import com.luisow748.contasapg.service.input.AuthenticationResponse
@@ -26,5 +26,14 @@ class SecurityController(
     ): ResponseEntity<AuthenticationResponse> {
         val authenticationResponse = authenticationService.authenticate(request)
         return ResponseEntity.ok(authenticationResponse)
+    }
+    @GetMapping("/verify")
+    fun verify(@RequestHeader("Authorization") token: String): ResponseEntity<Boolean> {
+        val isInvalidToken: Boolean = try {
+            authenticationService.isTokenValid(token)
+        } catch (ex: Exception) {
+            false
+        }
+        return ResponseEntity.ok(isInvalidToken)
     }
 }

@@ -9,6 +9,7 @@ class AccountServiceMediator(
     val dateAccountService: DateAccountService,
     val installmentServiceMediator: InstallmentServiceMediator,
     val statusAccountService: StatusAccountService,
+    val setAccountCreditorService: SetAccountCreditorService
 ) {
     lateinit var account: Account
     fun setCreationDate() {
@@ -22,10 +23,14 @@ class AccountServiceMediator(
     fun setStatus(){
         statusAccountService.setStatus(this.account)
     }
+
+    fun setCreditor(){
+        setAccountCreditorService.execute(this.account)
+    }
     fun prepareAccount(account: Account) {
         this.account = account
         setStatus()
-        installmentServiceMediator.setInstallments(account)
+//        installmentServiceMediator.setInstallments(account)
         setCreationDate()
         setExpirationDate()
 

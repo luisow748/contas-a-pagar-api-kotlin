@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class InstallmentServiceMediator(
     val installmentRepository: InstallmentRepository,
-    val setInstallmentService: SetInstallmentService
+    val setInstallmentFromAccountService: SetInstallmentFromAccountService
 ) {
     fun getAll(): List<Installment> {
         return installmentRepository.findAll()
@@ -19,7 +19,7 @@ class InstallmentServiceMediator(
     }
 
     fun setInstallments(account: Account): Account {
-        return setInstallmentService.execute(account)
+        return setInstallmentFromAccountService.execute(account)
     }
 }
 

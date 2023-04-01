@@ -1,5 +1,6 @@
 package com.luisow748.contasapg.domain
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -17,10 +18,16 @@ class Account
     var installmentQty: Int? = 0,
     var installmentValue: BigDecimal? = BigDecimal.ZERO,
 
+    var creditor: String? = "",
+
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "account")
+    @JsonBackReference
     var installments: MutableList<Installment>? = mutableListOf(),
 
     var createdAt: String? = LocalDate.now().toString(),
+    var firstExpirationDay: Int? = 0,
+    var firstExpirationMonth: Int? = 0,
+    var firstExpirationYear: Int? = 0,
 
     var expirationDay: String? = "",
     var expirationMonth: String? = "",

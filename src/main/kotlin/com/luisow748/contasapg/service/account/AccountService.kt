@@ -5,16 +5,23 @@ import com.luisow748.contasapg.repository.AccountRepository
 import com.luisow748.contasapg.service.dto.account.AccountRequest
 import com.luisow748.contasapg.service.dto.account.toEntity
 import com.luisow748.contasapg.service.dto.account.toResponse
+import com.luisow748.contasapg.service.installment.InstallmentServiceMediator
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
 
 @Service
 class AccountService(
     val accountRepository: AccountRepository,
-    val accountServiceMediator: AccountServiceMediator
+    val accountServiceMediator: AccountServiceMediator,
+    val installmentServiceMediator: InstallmentServiceMediator
 ) {
-    fun getAll(): List<AccountRequest> {
-        return accountRepository.findAll().map { it.toResponse() }
+    fun getTotalAccounts(): Int {
+//        return accountRepository.findAll().map { it.toResponse() }
+        return accountRepository.findAll().size
+    }
+    fun getAll(pageable: Pageable): MutableList<Account> {
+//        return accountRepository.findAll().map { it.toResponse() }
+        return accountRepository.findAll(pageable).content
     }
 
     fun getById(id: Int): AccountRequest {
@@ -30,6 +37,7 @@ class AccountService(
         val accountEntity = account.toEntity()
         accountServiceMediator.prepareAccount(accountEntity)
         val savedAccount = accountRepository.save(accountEntity)
+        installmentServiceMediator.setInstallments(account.toEntity())
         return savedAccount.toResponse()
     }
 
@@ -44,25 +52,26 @@ class AccountService(
         accountRepository.deleteById(id)
     }
 
-    fun saveFakes(): List<AccountRequest> {
-        val accountList = mutableListOf<AccountRequest>()
-        for (index in 1..25) {
-            val accountRequest = AccountRequest(
-                index,
-                "Account nº $index",
-                BigDecimal.valueOf((100..8000).random().toDouble()),
-                (1..12).random(),
-                BigDecimal.ZERO,
-                "pending",
-                "",
-                (1..31).random().toString(),
-                null,
-                null
-            )
-            accountList.add(save(accountRequest))
-        }
-        return accountList
-    }
+//    fun saveFakes(): List<AccountRequest> {
+//        val accountList = mutableListOf<AccountRequest>()
+//        for (index in 1..25) {
+//            val accountRequest = AccountRequest(
+//                index,
+//                "Account nº $index",
+//                BigDecimal.valueOf((100..8000).random().toDouble()),
+//                (1..12).random(),
+//                BigDecimal.ZERO,
+//                "pending",
+//                "",
+//                (1..31).random().toString(),
+//                null,
+//                null,
+//                expirationDay = ""
+//            )
+//            accountList.add(save(accountRequest))
+//        }
+//        return accountList
+//    }
 
 
 }
