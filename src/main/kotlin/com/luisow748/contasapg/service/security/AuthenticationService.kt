@@ -1,4 +1,4 @@
-package com.luisow748.contasapg.service.security;
+package com.luisow748.contasapg.service.security
 
 import com.luisow748.contasapg.config.JwtService
 import com.luisow748.contasapg.domain.Role
@@ -31,7 +31,8 @@ class AuthenticationService(
         userRepository.save(user)
         val jwtToken: String = jwtService.generateToken(user)
         return AuthenticationResponse(
-            token = jwtToken
+            token = jwtToken,
+            username = user.firstName
         )
     }
 
@@ -47,8 +48,13 @@ class AuthenticationService(
         val jwtToken: String? = user?.let { jwtService.generateToken(it) }
         return jwtToken?.let {
             AuthenticationResponse(
-                token = it
+                token = it,
+                username = user.firstName
             )
         }
+    }
+
+    fun isTokenValid(token: String): Boolean {
+        return jwtService.isTokenExpired(token)
     }
 }

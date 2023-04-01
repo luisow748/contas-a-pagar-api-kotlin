@@ -1,6 +1,7 @@
 package com.luisow748.contasapg.service.dto.account
 
 import com.luisow748.contasapg.domain.Account
+import com.luisow748.contasapg.domain.Installment
 import java.math.BigDecimal
 
 data class AccountRequest(
@@ -9,8 +10,14 @@ data class AccountRequest(
         var totalValue: BigDecimal?,
         var installmentQty: Int?,
         var installmentValue: BigDecimal?,
+        var installments: MutableList<Installment>? = mutableListOf(),
+        var creditor: String? = "",
         var status: String?,
         var createdAt: String?,
+
+        var firstExpirationDay: Int? = 0,
+        var firstExpirationMonth: Int? = 0,
+        var firstExpirationYear: Int? = 0,
         var expirationDay: String?,
         var expirationMonth: String?,
         var expirationYear: String?,
@@ -19,8 +26,10 @@ data class AccountRequest(
 fun AccountRequest.toEntity() = Account(
         id = id,
         totalValue = totalValue,
+        creditor = creditor,
         installmentQty = installmentQty,
         installmentValue = installmentValue,
+        installments = installments,
         status = status ?: "",
         createdAt = createdAt,
         expirationDay = expirationDay,

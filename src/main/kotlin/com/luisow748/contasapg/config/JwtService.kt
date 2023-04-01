@@ -1,4 +1,4 @@
-package com.luisow748.contasapg.config;
+package com.luisow748.contasapg.config
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -35,7 +35,7 @@ class JwtService(
         return userName == userDetails.username && !isTokenExpired(token)
     }
 
-    private fun isTokenExpired(token: String?): Boolean {
+    fun isTokenExpired(token: String?): Boolean {
         return extractExpiration(token).before(Date())
     }
 
@@ -44,7 +44,7 @@ class JwtService(
     }
 
     fun generateToken(
-        extraClaims: kotlin.collections.Map<String?, Any?>?,
+        extraClaims: Map<String?, Any?>?,
         userDetails: UserDetails
     ): String {
         return Jwts.builder()
@@ -66,7 +66,7 @@ class JwtService(
     }
 
     private val signInKey: Key
-        private get() {
+        get() {
             val secretKey = config.getConfigValue("app.secret")
             val keyBytes = Decoders.BASE64.decode(secretKey)
             return Keys.hmacShaKeyFor(keyBytes)
